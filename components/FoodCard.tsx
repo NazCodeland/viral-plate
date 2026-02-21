@@ -1,32 +1,27 @@
 "use client";
 // components/FoodCard.tsx
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Dish } from "@/app/types";
 import { OverlayProvider, useOverlay } from "@/state/useOverlay";
 import CreatorHeader from "./CreatorHeader";
 import MenuButton from "./MenuButton";
 import OrderPanel from "./OrderPanel";
 import SocialRail from "./SocialRail";
+import AppMenu from "./AppMenu";
 
 interface Props {
   dish: Dish;
   onComment?: () => void;
-  onMenu?: () => void;
   onCreator?: () => void;
   onCustomize?: () => void;
 }
 
-function FoodCardInner({
-  dish,
-  onComment,
-  onMenu,
-  onCreator,
-  onCustomize,
-}: Props) {
+function FoodCardInner({ dish, onComment, onCreator, onCustomize }: Props) {
   const { visible, triggerReveal, hide } = useOverlay();
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -95,7 +90,7 @@ function FoodCardInner({
         className="transition-opacity duration-300"
         style={overlayTransition}
       >
-        <MenuButton onClick={onMenu} />
+        <MenuButton onClick={() => setMenuOpen(true)} />
       </div>
 
       <div
@@ -121,6 +116,8 @@ function FoodCardInner({
           onCustomize={onCustomize}
         />
       </div>
+
+      <AppMenu open={menuOpen} onOpenChange={setMenuOpen} />
     </div>
   );
 }

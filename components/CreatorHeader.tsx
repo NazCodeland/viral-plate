@@ -1,4 +1,4 @@
-'use client';
+"use client";
 // components/CreatorHeader.tsx
 
 interface Props {
@@ -12,11 +12,11 @@ export default function CreatorHeader({ handle, avatarUrl, onClick }: Props) {
     <button
       onClick={onClick}
       aria-label={`View ${handle} profile`}
-      className="absolute top-[max(50px,env(safe-area-inset-top))] left-4 z-20 flex items-center gap-2.5 bg-transparent border-none cursor-pointer transition-transform active:scale-95"
+      className="absolute top-[max(80px,env(safe-area-inset-top))] left-4 z-20 flex items-center gap-2.5 bg-transparent border-none cursor-pointer transition-transform active:scale-95"
     >
       {/* Avatar */}
       <div
-        className="w-9 h-9 rounded-full border-2 border-white/80 bg-cover bg-center flex-shrink-0"
+        className="w-9 h-9 rounded-full border-2 border-white/80 bg-cover bg-center shrink-0"
         style={{ backgroundImage: `url('${avatarUrl}')` }}
       />
       {/* Text */}

@@ -1,0 +1,9 @@
+// app/(secondary)/layout.tsx
+
+export default function SecondaryLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <div className="min-h-screen bg-gray-50">{children}</div>;
+}
