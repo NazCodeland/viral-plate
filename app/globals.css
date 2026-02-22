@@ -12,14 +12,6 @@ html {
   height: 100%;
 }
 
-html {
-  scrollbar-width: none; /* Firefox */
-}
-
-html::-webkit-scrollbar {
-  display: none; /* Chrome, Safari */
-}
-
 body {
   overscroll-behavior: none;
   height: 100%;

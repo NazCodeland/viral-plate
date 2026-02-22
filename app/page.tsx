@@ -36,7 +36,8 @@ export default function FeedPage() {
       <MenuButton visible={isMenuVisible} onClick={() => setMenuOpen(true)} />
       <AppMenu open={menuOpen} onOpenChange={setMenuOpen} />
 
-      <div className="h-screen w-full snap-y snap-mandatory overflow-y-scroll bg-black">
+      <div className="h-screen w-full snap-y snap-mandatory overflow-y-scroll bg-black [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {" "}
         {feed.map((video) => (
           <div
             key={video._id}

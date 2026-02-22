@@ -53,6 +53,16 @@ function FoodCardInner({
     const container = containerRef.current;
     if (!container) return;
 
+    // Walk up the DOM to find the actual scrolling ancestor — the div in
+    // page.tsx with overflow-y-scroll. Using it as root means intersectionRatio
+    // is always calculated relative to that container's height, not the visual
+    // viewport. This fixes split-screen mode on Android where the visual
+    // viewport is smaller than the card, making threshold 0.9 against the
+    // viewport unreachable before the user scrolls a single pixel.
+    const scrollRoot = container.closest(
+      '[class*="overflow-y"]',
+    ) as HTMLElement | null;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.intersectionRatio >= 0.9) {
@@ -66,7 +76,10 @@ function FoodCardInner({
           }
         }
       },
-      { root: null, threshold: [0, 0.9] },
+      {
+        root: scrollRoot,
+        threshold: [0, 0.9],
+      },
     );
 
     observer.observe(container);
@@ -144,6 +157,7 @@ function FoodCardInner({
             playsInline
             poster={dish.posterUrl}
             className="h-full w-full object-cover"
+            onContextMenu={(e) => e.preventDefault()}
           >
             <source src={dish.videoSrc} type="video/mp4" />
           </video>
@@ -158,12 +172,12 @@ function FoodCardInner({
       {/*
         ── Tap / hold capture layer (z-10) ──────────────────────────────
         Sits above the video but below all UI (z-20).
-        • touch-action: none  → prevents the browser stealing the gesture
-          for scrolling before our timer fires.
-        • user-select / -webkit-touch-callout: none  → suppresses the iOS
-          "Save Image" and Android long-press context menus.
-        • pointer-events always "auto" so it catches every gesture even
-          when the UI is hidden.
+        • touchAction: pan-y     → allows native vertical scroll while
+                                   still letting our hold timer fire.
+        • userSelect / WebkitTouchCallout: none → suppresses iOS "Save
+          Image" and Android long-press context menus.
+        • pointer-events always "auto" so gestures are caught even when
+          the UI is hidden.
       */}
       <div
         className="absolute inset-0 z-10"
