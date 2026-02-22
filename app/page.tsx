@@ -43,13 +43,10 @@ export default function FeedPage() {
       */}
       <div
         data-scroll-root
-        className="h-screen w-full snap-y snap-mandatory overflow-y-scroll bg-black [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="h-dvh w-full snap-y snap-mandatory overflow-y-scroll bg-black [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {feed.map((video) => (
-          <div
-            key={video._id}
-            className="h-screen w-full snap-start snap-always"
-          >
+          <div key={video._id} className="w-full snap-start snap-always">
             <FoodCard
               dish={{
                 id: video._id,

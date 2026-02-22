@@ -5,5 +5,5 @@ export default function SecondaryLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div className="min-h-screen bg-gray-50">{children}</div>;
+  return <div className="bg-gray-50">{children}</div>;
 }

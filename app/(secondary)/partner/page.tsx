@@ -9,11 +9,11 @@ export default function JoinPartnerPage() {
   const [selectedType, setSelectedType] = useState<PartnerType>("creator");
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background">
       <div className="max-w-2xl mx-auto px-4 pt-4 pb-2">
         <h1 className="text-2xl font-bold">Join as a Partner</h1>
         <p className="text-muted-foreground mt-1">
-          Choose how you'd like to partner with us
+          Choose how you&apos;d like to partner with us
         </p>
       </div>
 

@@ -94,7 +94,7 @@ function FoodCardInner({
   return (
     <div
       ref={containerRef}
-      className="relative flex h-screen w-full shrink-0 flex-col justify-end overflow-hidden bg-black font-['Inter',sans-serif]"
+      className="relative flex h-dvh w-full shrink-0 flex-col justify-end overflow-hidden bg-black font-['Inter',sans-serif]"
       style={{
         touchAction: "pan-y",
         userSelect: "none",

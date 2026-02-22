@@ -3,7 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function VideoCardSkeleton() {
   return (
-    <div className="relative h-screen w-full bg-gray-900">
+    <div className="relative w-full bg-gray-900">
       {/* Top Navigation Bar */}
       <div className="absolute top-4 left-4 right-4 z-20 flex items-center justify-between">
         <div className="flex items-center gap-3">
