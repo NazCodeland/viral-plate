@@ -13,7 +13,6 @@ export default function FeedPage() {
   const feed = useQuery(api.videos.getFeed, {});
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // New state to sync the global menu button with the local food cards
   const [isMenuVisible, setIsMenuVisible] = useState(false);
 
   function openComments() {
@@ -32,12 +31,20 @@ export default function FeedPage() {
 
   return (
     <>
-      {/* Pass the visibility state to the global menu button */}
       <MenuButton visible={isMenuVisible} onClick={() => setMenuOpen(true)} />
       <AppMenu open={menuOpen} onOpenChange={setMenuOpen} />
 
-      <div className="h-screen w-full snap-y snap-mandatory overflow-y-scroll bg-black [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {" "}
+      {/*
+        data-scroll-root: semantic marker so FoodCard's IntersectionObserver
+        can target this exact element as its root via closest("[data-scroll-root]").
+        This makes the observer measure intersection ratios relative to this
+        container's height rather than the visual viewport — fixing split-screen
+        mode where the viewport can be smaller than the card.
+      */}
+      <div
+        data-scroll-root
+        className="h-screen w-full snap-y snap-mandatory overflow-y-scroll bg-black [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
         {feed.map((video) => (
           <div
             key={video._id}
@@ -69,7 +76,6 @@ export default function FeedPage() {
               onComment={openComments}
               onCreator={viewCreator}
               onCustomize={openCustomize}
-              // Pass the callback to let the card control the global menu button
               onOverlayChange={setIsMenuVisible}
             />
           </div>

@@ -53,14 +53,12 @@ function FoodCardInner({
     const container = containerRef.current;
     if (!container) return;
 
-    // Walk up the DOM to find the actual scrolling ancestor — the div in
-    // page.tsx with overflow-y-scroll. Using it as root means intersectionRatio
-    // is always calculated relative to that container's height, not the visual
-    // viewport. This fixes split-screen mode on Android where the visual
-    // viewport is smaller than the card, making threshold 0.9 against the
-    // viewport unreachable before the user scrolls a single pixel.
+    // Target the scroll container via a semantic data attribute rather than
+    // a class string query. This is stable — immune to Tailwind class renames
+    // and explicit about intent. The attribute is set on the outer feed div
+    // in page.tsx. Falls back to null (visual viewport) if not found.
     const scrollRoot = container.closest(
-      '[class*="overflow-y"]',
+      "[data-scroll-root]",
     ) as HTMLElement | null;
 
     const observer = new IntersectionObserver(
