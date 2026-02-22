@@ -22,7 +22,6 @@ export default function OrderPanel({
   title,
   restaurantName,
   distanceKm,
-  arrivalTime,
   arrivalMinutes,
   price,
   onCustomize,
@@ -54,50 +53,38 @@ export default function OrderPanel({
   ].join(" ");
 
   return (
-    <div className="relative z-20 p-4 flex flex-col gap-4">
-      {/*
-        RestaurantPill is deliberately OUTSIDE the fading wrapper.
-        It uses backdrop-blur — if we fade a parent from opacity 0→1,
-        browsers disable blur until opacity hits 1, causing a visible snap.
-        The Pill handles its own fade internally (0.01 min opacity) to keep
-        the GPU blur layer alive.
-      */}
-      <RestaurantPill name={restaurantName} distanceKm={distanceKm} />
-
-      {/* Standard content fade — no backdrop-filter here so 0→1 is fine */}
+    <div className="relative z-20 p-4 flex flex-col gap-3">
       <div
-        className="flex flex-col gap-4 transition-opacity duration-300"
+        className="flex flex-col gap-3 transition-opacity duration-300"
         style={{
           opacity: effectivelyVisible ? 1 : 0,
           pointerEvents: effectivelyVisible ? "auto" : "none",
         }}
       >
-        {/* Dish title — hold caught by event delegation on FoodCard root */}
+        {/* Row 1: Dish title */}
         <h1
           className="text-white font-extrabold leading-[0.95] tracking-tight [text-shadow:0_4px_12px_rgba(0,0,0,0.3)]"
           style={{ fontSize: "clamp(36px, 10vw, 48px)" }}
           dangerouslySetInnerHTML={{ __html: title }}
         />
 
-        {/* Meta row — hold caught by event delegation on FoodCard root */}
+        {/* Row 2: Fulfilled pill + Customize */}
         <div className="flex items-center justify-between">
-          <div className="flex flex-col gap-0.5">
-            <span className="text-[11px] uppercase text-white/60 font-semibold tracking-[0.5px]">
-              Arrives By
-            </span>
-            <span className="text-base font-semibold text-white flex items-center gap-1">
-              {arrivalTime}
-              <span className="text-sm opacity-70 font-normal">
-                ({arrivalMinutes}m)
-              </span>
-            </span>
-          </div>
+          <RestaurantPill name={restaurantName} distanceKm={distanceKm} />
+          <CustomizeDish onClick={onCustomize} />
+        </div>
+
+        {/* Row 3: Arrives in + Price */}
+        <div className="flex items-center justify-between">
+          <span className="text-base font-semibold text-white">
+            Arrives in {arrivalMinutes}m
+          </span>
           <span className="text-[32px] font-bold text-white tracking-tight">
             {formattedPrice}
           </span>
         </div>
 
-        {/* Place Order — button, filtered out by hook automatically */}
+        {/* Row 4: Order button */}
         <button
           onClick={placeOrder}
           disabled={orderState !== "idle"}
@@ -106,7 +93,7 @@ export default function OrderPanel({
         >
           {orderState === "idle" && (
             <>
-              Place Order
+              Order Now
               <svg
                 width="18"
                 height="18"
@@ -146,9 +133,6 @@ export default function OrderPanel({
             </>
           )}
         </button>
-
-        {/* Customize — button, filtered out by hook automatically */}
-        <CustomizeDish onClick={onCustomize} />
       </div>
     </div>
   );

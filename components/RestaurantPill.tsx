@@ -1,14 +1,5 @@
 "use client";
 // components/RestaurantPill.tsx
-//
-// opacity stays at 0.01 when hidden (not 0) to keep the backdrop-blur
-// compositor layer alive — killing the layer causes a visible snap when
-// it re-composites on reveal.
-//
-// Hold-to-hide is handled automatically by event delegation on the
-// FoodCard root — no props or wiring needed here.
-
-import { useOverlay } from "@/state/useOverlay";
 
 interface Props {
   name: string;
@@ -16,16 +7,8 @@ interface Props {
 }
 
 export default function RestaurantPill({ name, distanceKm }: Props) {
-  const { effectivelyVisible } = useOverlay();
-
   return (
-    <div
-      className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 w-fit transition-opacity duration-300"
-      style={{
-        opacity: effectivelyVisible ? 1 : 0.01,
-        pointerEvents: effectivelyVisible ? "auto" : "none",
-      }}
-    >
+    <div className="inline-flex items-center gap-2 w-fit">
       <svg
         width="14"
         height="14"

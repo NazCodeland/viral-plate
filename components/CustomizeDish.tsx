@@ -9,7 +9,7 @@ export default function CustomizeDish({ onClick }: Props) {
   return (
     <button
       onClick={onClick}
-      className="mx-auto h-12 bg-transparent border-none text-[13px] font-medium tracking-[0.1px] text-white/60 cursor-pointer hover:text-white transition-colors duration-200 px-6"
+      className="bg-transparent border-none text-[13px] font-medium tracking-[0.1px] text-white/60 cursor-pointer hover:text-white transition-colors duration-200"
     >
       Customize
     </button>
