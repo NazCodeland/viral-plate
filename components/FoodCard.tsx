@@ -1,9 +1,17 @@
 "use client";
 // components/FoodCard.tsx
+//
+// Hold-to-hide uses event delegation via useHoldToHide() from useOverlay.
+// A single set of pointer handlers on the root div catches all events.
+// Interactive elements (buttons, links) are filtered out inside the hook
+// via e.target.closest() — no z-index tricks, no prop drilling, no capture div.
+//
+// Swipe detection (onPointerMove) ensures scrolling to the next card never
+// accidentally triggers hide — a production bug in naive 250ms-only approaches.
 
 import { useEffect, useRef } from "react";
 import type { Dish } from "@/app/types";
-import { OverlayProvider, useOverlay } from "@/state/useOverlay";
+import { OverlayProvider, useOverlay, useHoldToHide } from "@/state/useOverlay";
 import CreatorHeader from "./CreatorHeader";
 import OrderPanel from "./OrderPanel";
 import SocialRail from "./SocialRail";
@@ -16,10 +24,6 @@ interface Props {
   onOverlayChange?: (visible: boolean) => void;
 }
 
-// How long the user must hold before we treat it as a "hold" vs a "tap".
-// 250 ms matches Instagram Reels and TikTok clear-mode behaviour.
-const HOLD_THRESHOLD_MS = 250;
-
 function FoodCardInner({
   dish,
   onComment,
@@ -27,21 +31,9 @@ function FoodCardInner({
   onCustomize,
   onOverlayChange,
 }: Props) {
-  const {
-    effectivelyVisible,
-    triggerReveal,
-    hide,
-    forceHide,
-    cancelForceHide,
-  } = useOverlay();
-
+  const { effectivelyVisible, triggerReveal, hide } = useOverlay();
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-
-  // Refs for tap-vs-hold detection — refs, not state, because we never
-  // want a re-render mid-gesture.
-  const holdTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const didHoldRef = useRef(false);
 
   // Sync effectivelyVisible up to the page so MenuButton can react.
   useEffect(() => {
@@ -53,10 +45,6 @@ function FoodCardInner({
     const container = containerRef.current;
     if (!container) return;
 
-    // Target the scroll container via a semantic data attribute rather than
-    // a class string query. This is stable — immune to Tailwind class renames
-    // and explicit about intent. The attribute is set on the outer feed div
-    // in page.tsx. Falls back to null (visual viewport) if not found.
     const scrollRoot = container.closest(
       "[data-scroll-root]",
     ) as HTMLElement | null;
@@ -74,65 +62,28 @@ function FoodCardInner({
           }
         }
       },
-      {
-        root: scrollRoot,
-        threshold: [0, 0.9],
-      },
+      { root: scrollRoot, threshold: [0, 0.9] },
     );
 
     observer.observe(container);
     return () => observer.disconnect();
   }, [triggerReveal, hide]);
 
-  // ── Tap-vs-hold handlers ─────────────────────────────────────────────────
-
-  function handlePointerDown() {
-    didHoldRef.current = false;
-
-    holdTimerRef.current = setTimeout(() => {
-      // Threshold passed → treat as hold → clear UI
-      didHoldRef.current = true;
-      forceHide();
-    }, HOLD_THRESHOLD_MS);
-  }
-
-  function handlePointerUp() {
-    if (holdTimerRef.current) {
-      clearTimeout(holdTimerRef.current);
-      holdTimerRef.current = null;
-    }
-
-    if (didHoldRef.current) {
-      // Released after a hold → restore UI
-      cancelForceHide();
+  // Tap on non-interactive surface → toggle play/pause.
+  function togglePlayPause() {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play().catch(() => {});
     } else {
-      // Released before threshold → it was a tap → toggle play / pause
-      const video = videoRef.current;
-      if (video) {
-        if (video.paused) {
-          video.play().catch(() => {});
-        } else {
-          video.pause();
-        }
-      }
-    }
-
-    didHoldRef.current = false;
-  }
-
-  function handlePointerLeave() {
-    // Finger / cursor left the element mid-hold — treat as a release.
-    if (holdTimerRef.current) {
-      clearTimeout(holdTimerRef.current);
-      holdTimerRef.current = null;
-    }
-    if (didHoldRef.current) {
-      cancelForceHide();
-      didHoldRef.current = false;
+      video.pause();
     }
   }
 
-  // ── Shared transition style for UI layers ────────────────────────────────
+  // Event delegation — one handler on the root, interactive elements
+  // are filtered out inside the hook. Swipe detection prevents accidental
+  // hide during scroll.
+  const holdProps = useHoldToHide({ onTap: togglePlayPause });
 
   const overlayStyle: React.CSSProperties = {
     opacity: effectivelyVisible ? 1 : 0,
@@ -144,8 +95,16 @@ function FoodCardInner({
     <div
       ref={containerRef}
       className="relative flex h-screen w-full shrink-0 flex-col justify-end overflow-hidden bg-black font-['Inter',sans-serif]"
+      style={{
+        touchAction: "pan-y",
+        userSelect: "none",
+        WebkitUserSelect: "none",
+        WebkitTouchCallout: "none",
+      }}
+      {...holdProps}
+      onContextMenu={(e) => e.preventDefault()}
     >
-      {/* ── Video layer (z-0) ─────────────────────────────────────────── */}
+      {/* ── Video layer ───────────────────────────────────────────────── */}
       <div className="absolute inset-0 z-0" aria-hidden="true">
         {dish.videoSrc ? (
           <video
@@ -167,40 +126,16 @@ function FoodCardInner({
         )}
       </div>
 
-      {/*
-        ── Tap / hold capture layer (z-10) ──────────────────────────────
-        Sits above the video but below all UI (z-20).
-        • touchAction: pan-y     → allows native vertical scroll while
-                                   still letting our hold timer fire.
-        • userSelect / WebkitTouchCallout: none → suppresses iOS "Save
-          Image" and Android long-press context menus.
-        • pointer-events always "auto" so gestures are caught even when
-          the UI is hidden.
-      */}
-      <div
-        className="absolute inset-0 z-10"
-        style={{
-          touchAction: "pan-y",
-          userSelect: "none",
-          WebkitUserSelect: "none",
-          WebkitTouchCallout: "none",
-        }}
-        onPointerDown={handlePointerDown}
-        onPointerUp={handlePointerUp}
-        onPointerLeave={handlePointerLeave}
-        onContextMenu={(e) => e.preventDefault()}
-      />
+      {/* ── UI layers ─────────────────────────────────────────────────── */}
 
-      {/* ── UI layers (z-20) — always above the capture div ──────────── */}
-
-      {/* CreatorHeader has z-20 baked in via its own className */}
+      {/* CreatorHeader — interactive, filtered out by hook automatically */}
       <CreatorHeader
         handle={dish.creator.handle}
         avatarUrl={dish.creator.avatarUrl}
         onClick={onCreator}
       />
 
-      {/* SocialRail has z-20 baked in via its own className */}
+      {/* SocialRail — interactive buttons, filtered out by hook automatically */}
       <div className="transition-opacity duration-300" style={overlayStyle}>
         <SocialRail
           likes={dish.stats.likes}
@@ -210,7 +145,7 @@ function FoodCardInner({
         />
       </div>
 
-      {/* OrderPanel reads effectivelyVisible from context directly */}
+      {/* OrderPanel — buttons filtered out automatically, text/price trigger hide */}
       <div className="relative z-20">
         <OrderPanel
           title={dish.title}

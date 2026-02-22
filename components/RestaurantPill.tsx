@@ -4,6 +4,9 @@
 // opacity stays at 0.01 when hidden (not 0) to keep the backdrop-blur
 // compositor layer alive — killing the layer causes a visible snap when
 // it re-composites on reveal.
+//
+// Hold-to-hide is handled automatically by event delegation on the
+// FoodCard root — no props or wiring needed here.
 
 import { useOverlay } from "@/state/useOverlay";
 
@@ -13,8 +16,6 @@ interface Props {
 }
 
 export default function RestaurantPill({ name, distanceKm }: Props) {
-  // effectivelyVisible already accounts for both the reveal timer and any
-  // active force-hide (hold gesture) — no extra logic needed here.
   const { effectivelyVisible } = useOverlay();
 
   return (

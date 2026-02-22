@@ -27,8 +27,6 @@ export default function OrderPanel({
   price,
   onCustomize,
 }: Props) {
-  // effectivelyVisible already accounts for both the reveal timer and any
-  // active force-hide (hold gesture) — no extra logic needed here.
   const { effectivelyVisible } = useOverlay();
   const [orderState, setOrderState] = useState<OrderState>("idle");
 
@@ -74,14 +72,14 @@ export default function OrderPanel({
           pointerEvents: effectivelyVisible ? "auto" : "none",
         }}
       >
-        {/* Dish title */}
+        {/* Dish title — hold caught by event delegation on FoodCard root */}
         <h1
           className="text-white font-extrabold leading-[0.95] tracking-tight [text-shadow:0_4px_12px_rgba(0,0,0,0.3)]"
           style={{ fontSize: "clamp(36px, 10vw, 48px)" }}
           dangerouslySetInnerHTML={{ __html: title }}
         />
 
-        {/* Meta row */}
+        {/* Meta row — hold caught by event delegation on FoodCard root */}
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-0.5">
             <span className="text-[11px] uppercase text-white/60 font-semibold tracking-[0.5px]">
@@ -99,7 +97,7 @@ export default function OrderPanel({
           </span>
         </div>
 
-        {/* Place Order button */}
+        {/* Place Order — button, filtered out by hook automatically */}
         <button
           onClick={placeOrder}
           disabled={orderState !== "idle"}
@@ -149,6 +147,7 @@ export default function OrderPanel({
           )}
         </button>
 
+        {/* Customize — button, filtered out by hook automatically */}
         <CustomizeDish onClick={onCustomize} />
       </div>
     </div>
