@@ -40,7 +40,7 @@ export default function FeedbackPage() {
     <>
       <PageHeader title="Feedback" />
       <div className="p-4 space-y-4">
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
+        <div className="rounded-2xl border border-gray-100 shadow-sm p-4">
           <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3">
             Category
           </p>
@@ -52,7 +52,7 @@ export default function FeedbackPage() {
                 className={`px-3.5 py-1.5 rounded-full text-sm font-medium border transition-all ${
                   category === cat
                     ? "bg-green-500 text-white border-green-500"
-                    : "bg-white text-gray-600 border-gray-200 hover:border-green-300"
+                    : "text-gray-600 border-gray-200 hover:border-green-300"
                 }`}
               >
                 {cat}
@@ -61,7 +61,7 @@ export default function FeedbackPage() {
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
+        <div className="rounded-2xl border border-gray-100 shadow-sm p-4">
           <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3">
             Message
           </p>

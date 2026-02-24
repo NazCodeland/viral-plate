@@ -2,6 +2,7 @@
 // app/(secondary)/partner/page.tsx
 
 import { useState } from "react";
+import PageHeader from "@/components/PageHeader";
 
 type PartnerType = "creator" | "restaurant";
 
@@ -9,16 +10,14 @@ export default function JoinPartnerPage() {
   const [selectedType, setSelectedType] = useState<PartnerType>("creator");
 
   return (
-    <div className="bg-background">
-      <div className="max-w-2xl mx-auto px-4 pt-4 pb-2">
-        <h1 className="text-2xl font-bold">Join as a Partner</h1>
-        <p className="text-muted-foreground mt-1">
+    <>
+      <PageHeader title="Join as a Partner" />
+      <div className="p-4">
+        <p className="text-muted-foreground mb-4">
           Choose how you&apos;d like to partner with us
         </p>
-      </div>
 
-      <div className="border-b">
-        <div className="max-w-2xl mx-auto px-4">
+        <div className="border-b mb-4">
           <div className="flex gap-8">
             {(["creator", "restaurant"] as PartnerType[]).map((type) => (
               <button
@@ -35,16 +34,14 @@ export default function JoinPartnerPage() {
             ))}
           </div>
         </div>
-      </div>
 
-      <div className="max-w-2xl mx-auto px-4 py-8">
         {selectedType === "creator" ? (
           <CreatorApplicationForm />
         ) : (
           <RestaurantApplicationForm />
         )}
       </div>
-    </div>
+    </>
   );
 }
 

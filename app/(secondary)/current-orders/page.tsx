@@ -53,7 +53,7 @@ export default function CurrentOrdersPage() {
 
 function OrderCard({ order }: { order: (typeof currentOrders)[0] }) {
   return (
-    <div className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div className="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
       <div className="p-4">
         <div className="flex items-start gap-3">
           <div className="relative size-16 rounded-xl overflow-hidden shrink-0">

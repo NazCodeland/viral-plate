@@ -66,7 +66,7 @@ export default function DeliveryAddressesPage() {
           return (
             <div
               key={address.id}
-              className={`bg-white rounded-2xl p-4 shadow-sm border transition-all ${address.isDefault ? "border-green-400 ring-1 ring-green-100" : "border-gray-100"}`}
+              className={`rounded-2xl p-4 shadow-sm border transition-all ${address.isDefault ? "border-green-400 ring-1 ring-green-100" : "border-gray-100"}`}
             >
               <div className="flex items-start gap-3">
                 <div
@@ -108,7 +108,7 @@ export default function DeliveryAddressesPage() {
                   </button>
 
                   {activeMenu === address.id && (
-                    <div className="absolute right-0 top-9 w-44 bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden z-10">
+                    <div className="absolute right-0 top-9 w-44 rounded-xl shadow-lg border border-gray-100 overflow-hidden z-10">
                       {!address.isDefault && (
                         <button
                           onClick={() => setDefault(address.id)}

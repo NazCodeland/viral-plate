@@ -46,7 +46,7 @@ export default function OrderPanel({
     "text-lg font-bold tracking-[0.1px] transition-all duration-200",
     "active:scale-[0.98] disabled:cursor-default",
     orderState === "placed"
-      ? "bg-white text-gray-900 shadow-[0_1px_3px_rgba(0,0,0,0.3),0_4px_8px_rgba(0,0,0,0.15)]"
+      ? "text-gray-900 shadow-[0_1px_3px_rgba(0,0,0,0.3),0_4px_8px_rgba(0,0,0,0.15)]"
       : orderState === "loading"
         ? "bg-[#2aa84a] text-[rgba(0,40,14,0.8)]"
         : "bg-[#34C759] text-[#003a10] shadow-[0_1px_2px_rgba(0,0,0,0.3)] hover:shadow-[0_2px_4px_rgba(0,0,0,0.3),0_6px_12px_rgba(52,199,89,0.35)]",

@@ -40,7 +40,7 @@ export default function HelpPage() {
         {faqs.map((group) => (
           <div
             key={group.section}
-            className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden"
+            className="rounded-2xl border border-gray-100 shadow-sm overflow-hidden"
           >
             <p className="px-4 pt-4 pb-2 text-xs font-semibold text-gray-400 uppercase tracking-widest">
               {group.section}

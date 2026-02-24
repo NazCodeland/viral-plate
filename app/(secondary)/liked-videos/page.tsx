@@ -95,7 +95,8 @@ export default function LikedVideosPage() {
 
 function VideoTile({ video }: { video: (typeof likedVideos)[0] }) {
   return (
-    <div className="relative aspect-3/4 overflow-hidden group cursor-pointer">
+    <div className="relative aspect-3/4 overflow-hidden rounded-sm group cursor-pointer">
+      {" "}
       <Image
         src={video.image}
         alt={video.title}

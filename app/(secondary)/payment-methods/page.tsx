@@ -104,7 +104,7 @@ export default function PaymentMethodsPage() {
             className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 animate-in fade-in duration-200"
             onClick={() => setSelectedCard(null)}
           />
-          <div className="fixed bottom-0 left-0 right-0 z-50 bg-white rounded-t-3xl shadow-2xl animate-in slide-in-from-bottom duration-300">
+          <div className="fixed bottom-0 left-0 right-0 z-50 rounded-t-3xl shadow-2xl animate-in slide-in-from-bottom duration-300">
             <div className="flex justify-center pt-3 pb-1">
               <div className="w-10 h-1 bg-gray-200 rounded-full" />
             </div>
