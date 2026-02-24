@@ -8,13 +8,14 @@ interface Props {
 
 export default function RestaurantPill({ name, distanceKm }: Props) {
   return (
-    <div className="inline-flex items-center gap-2 w-fit">
+    <div className="flex items-start gap-1.5 text-white/70">
       <svg
-        width="14"
-        height="14"
+        className="shrink-0 mt-1"
+        width="12"
+        height="12"
         viewBox="0 0 24 24"
         fill="none"
-        stroke="#34C759"
+        stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -22,8 +23,8 @@ export default function RestaurantPill({ name, distanceKm }: Props) {
         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
         <polyline points="9,22 9,12 15,12 15,22" />
       </svg>
-      <span className="text-[13px] font-semibold text-white tracking-[0.1px]">
-        Fulfilled by {name} ({distanceKm}km)
+      <span className="text-sm font-medium leading-snug line-clamp-2">
+        Made by {name} ({distanceKm}km)
       </span>
     </div>
   );

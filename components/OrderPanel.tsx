@@ -38,6 +38,7 @@ export default function OrderPanel({
   const formattedPrice = price.toLocaleString("en-CA", {
     style: "currency",
     currency: "CAD",
+    minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
 
@@ -46,14 +47,14 @@ export default function OrderPanel({
     "text-lg font-bold tracking-[0.1px] transition-all duration-200",
     "active:scale-[0.98] disabled:cursor-default",
     orderState === "placed"
-      ? "text-gray-900 shadow-[0_1px_3px_rgba(0,0,0,0.3),0_4px_8px_rgba(0,0,0,0.15)]"
+      ? "bg-white text-gray-900 shadow-[0_1px_3px_rgba(0,0,0,0.3),0_4px_8px_rgba(0,0,0,0.15)]"
       : orderState === "loading"
         ? "bg-[#2aa84a] text-[rgba(0,40,14,0.8)]"
         : "bg-[#34C759] text-[#003a10] shadow-[0_1px_2px_rgba(0,0,0,0.3)] hover:shadow-[0_2px_4px_rgba(0,0,0,0.3),0_6px_12px_rgba(52,199,89,0.35)]",
   ].join(" ");
 
   return (
-    <div className="relative z-20 p-4 flex flex-col gap-3">
+    <div className="relative z-20 p-4 flex flex-col gap-3 w-full bg-gradient-to-t from-black/80 via-black/40 to-transparent pt-12">
       <div
         className="flex flex-col gap-3 transition-opacity duration-300"
         style={{
@@ -63,23 +64,27 @@ export default function OrderPanel({
       >
         {/* Row 1: Dish title */}
         <h1
-          className="text-white font-extrabold leading-[0.95] tracking-tight [text-shadow:0_4px_12px_rgba(0,0,0,0.3)]"
+          className="text-white font-extrabold leading-[0.95] tracking-tight [text-shadow:0_4px_16px_rgba(0,0,0,0.6)]"
           style={{ fontSize: "clamp(36px, 10vw, 48px)" }}
           dangerouslySetInnerHTML={{ __html: title }}
         />
 
-        {/* Row 2: Fulfilled pill + Customize */}
-        <div className="flex items-center justify-between">
-          <RestaurantPill name={restaurantName} distanceKm={distanceKm} />
-          <CustomizeDish onClick={onCustomize} />
+        {/* Row 2: Made by pill + Customize */}
+        <div className="flex items-end justify-between gap-3 w-full">
+          <div className="flex-1 min-w-0">
+            <RestaurantPill name={restaurantName} distanceKm={distanceKm} />
+          </div>
+          <div className="shrink-0">
+            <CustomizeDish onClick={onCustomize} />
+          </div>
         </div>
 
         {/* Row 3: Arrives in + Price */}
         <div className="flex items-center justify-between">
-          <span className="text-base font-semibold text-white">
+          <span className="text-sm font-medium text-white/90">
             Arrives in {arrivalMinutes}m
           </span>
-          <span className="text-[32px] font-bold text-white tracking-tight">
+          <span className="text-[32px] font-bold text-white tracking-tight [text-shadow:0_2px_8px_rgba(0,0,0,0.4)]">
             {formattedPrice}
           </span>
         </div>
@@ -111,7 +116,7 @@ export default function OrderPanel({
           )}
           {orderState === "loading" && (
             <>
-              <span className="w-18px h-18px rounded-full border-2 border-[rgba(0,40,14,0.3)] border-t-[#003a10] animate-spin inline-block" />
+              <span className="w-[18px] h-[18px] rounded-full border-2 border-[rgba(0,40,14,0.3)] border-t-[#003a10] animate-spin inline-block" />
               Sending to Kitchen...
             </>
           )}
