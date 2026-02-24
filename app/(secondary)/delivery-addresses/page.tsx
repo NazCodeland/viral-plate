@@ -66,33 +66,45 @@ export default function DeliveryAddressesPage() {
           return (
             <div
               key={address.id}
-              className={`rounded-2xl p-4 shadow-sm border transition-all ${address.isDefault ? "border-green-400 ring-1 ring-green-100" : "border-gray-100"}`}
+              className={`rounded-2xl p-4 shadow-sm border transition-all bg-card ${
+                address.isDefault
+                  ? "border-green-500 ring-1 ring-green-500/20"
+                  : "border-border"
+              }`}
             >
               <div className="flex items-start gap-3">
                 <div
-                  className={`size-10 rounded-xl flex items-center justify-center shrink-0 ${address.isDefault ? "bg-green-100" : "bg-gray-100"}`}
+                  className={`size-10 rounded-xl flex items-center justify-center shrink-0 ${
+                    address.isDefault ? "bg-green-500/10" : "bg-muted"
+                  }`}
                 >
                   <Icon
-                    className={`size-5 ${address.isDefault ? "text-green-600" : "text-gray-500"}`}
+                    className={`size-5 ${
+                      address.isDefault
+                        ? "text-green-600"
+                        : "text-muted-foreground"
+                    }`}
                   />
                 </div>
 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="text-sm font-semibold text-gray-900">
+                    <span className="text-sm font-semibold text-card-foreground">
                       {address.label}
                     </span>
                     {address.isDefault && (
-                      <span className="text-xs bg-green-100 text-green-700 font-medium px-2 py-0.5 rounded-full flex items-center gap-1">
+                      <span className="text-xs bg-green-500/10 text-green-600 font-medium px-2 py-0.5 rounded-full flex items-center gap-1">
                         <Check className="size-3" />
                         Default
                       </span>
                     )}
                   </div>
-                  <p className="text-sm text-gray-600 mt-0.5">
+                  <p className="text-sm text-foreground mt-0.5">
                     {address.line1}
                   </p>
-                  <p className="text-xs text-gray-400">{address.line2}</p>
+                  <p className="text-xs text-muted-foreground">
+                    {address.line2}
+                  </p>
                 </div>
 
                 <div className="relative">
@@ -102,29 +114,29 @@ export default function DeliveryAddressesPage() {
                         activeMenu === address.id ? null : address.id,
                       )
                     }
-                    className="size-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
+                    className="size-8 flex items-center justify-center rounded-full hover:bg-muted transition-colors"
                   >
-                    <MoreVertical className="size-4 text-gray-400" />
+                    <MoreVertical className="size-4 text-muted-foreground" />
                   </button>
 
                   {activeMenu === address.id && (
-                    <div className="absolute right-0 top-9 w-44 rounded-xl shadow-lg border border-gray-100 overflow-hidden z-10">
+                    <div className="absolute right-0 top-9 w-44 rounded-xl shadow-lg border border-border bg-popover overflow-hidden z-10">
                       {!address.isDefault && (
                         <button
                           onClick={() => setDefault(address.id)}
-                          className="flex items-center gap-2 w-full px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                          className="flex items-center gap-2 w-full px-4 py-2.5 text-sm text-popover-foreground hover:bg-muted transition-colors"
                         >
                           <Check className="size-4 text-green-600" />
                           Set as default
                         </button>
                       )}
-                      <button className="flex items-center gap-2 w-full px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
-                        <MapPin className="size-4 text-gray-400" />
+                      <button className="flex items-center gap-2 w-full px-4 py-2.5 text-sm text-popover-foreground hover:bg-muted transition-colors">
+                        <MapPin className="size-4 text-muted-foreground" />
                         Edit address
                       </button>
                       <button
                         onClick={() => deleteAddress(address.id)}
-                        className="flex items-center gap-2 w-full px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 transition-colors border-t border-gray-100"
+                        className="flex items-center gap-2 w-full px-4 py-2.5 text-sm text-destructive hover:bg-destructive/10 transition-colors border-t border-border"
                       >
                         <svg className="size-4" fill="none" viewBox="0 0 24 24">
                           <path
@@ -145,7 +157,7 @@ export default function DeliveryAddressesPage() {
           );
         })}
 
-        <button className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl border-2 border-dashed border-gray-200 text-sm font-semibold text-gray-400 hover:border-green-400 hover:text-green-600 hover:bg-green-50 transition-all">
+        <button className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl border-2 border-dashed border-border text-sm font-semibold text-muted-foreground hover:border-green-500 hover:text-green-600 hover:bg-green-500/5 transition-all">
           <Plus className="size-4" />
           Add New Address
         </button>

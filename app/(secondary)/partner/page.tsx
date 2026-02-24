@@ -17,7 +17,7 @@ export default function JoinPartnerPage() {
           Choose how you&apos;d like to partner with us
         </p>
 
-        <div className="border-b mb-4">
+        <div className="border-b border-border mb-4">
           <div className="flex gap-8">
             {(["creator", "restaurant"] as PartnerType[]).map((type) => (
               <button
@@ -49,7 +49,9 @@ function CreatorApplicationForm() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-xl font-semibold mb-2">Become a Creator</h2>
+        <h2 className="text-xl font-semibold text-foreground mb-2">
+          Become a Creator
+        </h2>
         <p className="text-muted-foreground">
           Upload food videos and earn money when users order from your recipes.
         </p>
@@ -58,31 +60,31 @@ function CreatorApplicationForm() {
         <Field label="Full Name" placeholder="Enter your full name" />
         <Field label="Creator Username" placeholder="@username" />
         <div>
-          <label className="block text-sm font-medium mb-2">
+          <label className="block text-sm font-medium text-foreground mb-2">
             Social Media Links
           </label>
           <input
             type="text"
-            className="w-full px-3 py-2 border rounded-md mb-2"
+            className="w-full px-3 py-2 border border-input rounded-md mb-2 bg-background text-foreground placeholder:text-muted-foreground"
             placeholder="TikTok URL"
           />
           <input
             type="text"
-            className="w-full px-3 py-2 border rounded-md mb-2"
+            className="w-full px-3 py-2 border border-input rounded-md mb-2 bg-background text-foreground placeholder:text-muted-foreground"
             placeholder="Instagram URL"
           />
           <input
             type="text"
-            className="w-full px-3 py-2 border rounded-md"
+            className="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground placeholder:text-muted-foreground"
             placeholder="YouTube URL"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-2">
+          <label className="block text-sm font-medium text-foreground mb-2">
             Tell us about yourself
           </label>
           <textarea
-            className="w-full px-3 py-2 border rounded-md"
+            className="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground placeholder:text-muted-foreground"
             rows={4}
             placeholder="What kind of content do you create? What's your cooking style?"
           />
@@ -97,7 +99,9 @@ function RestaurantApplicationForm() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-xl font-semibold mb-2">Register as Restaurant</h2>
+        <h2 className="text-xl font-semibold text-foreground mb-2">
+          Register as Restaurant
+        </h2>
         <p className="text-muted-foreground">
           Fulfill orders and showcase your menu through engaging food videos.
         </p>
@@ -112,53 +116,53 @@ function RestaurantApplicationForm() {
           placeholder="Enter your business license number"
         />
         <div>
-          <label className="block text-sm font-medium mb-2">
+          <label className="block text-sm font-medium text-foreground mb-2">
             Restaurant Address
           </label>
           <input
             type="text"
-            className="w-full px-3 py-2 border rounded-md mb-2"
+            className="w-full px-3 py-2 border border-input rounded-md mb-2 bg-background text-foreground placeholder:text-muted-foreground"
             placeholder="Street address"
           />
           <div className="grid grid-cols-2 gap-2">
             <input
               type="text"
-              className="px-3 py-2 border rounded-md"
+              className="px-3 py-2 border border-input rounded-md bg-background text-foreground placeholder:text-muted-foreground"
               placeholder="City"
             />
             <input
               type="text"
-              className="px-3 py-2 border rounded-md"
+              className="px-3 py-2 border border-input rounded-md bg-background text-foreground placeholder:text-muted-foreground"
               placeholder="Postal code"
             />
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium mb-2">
+          <label className="block text-sm font-medium text-foreground mb-2">
             Contact Person
           </label>
           <input
             type="text"
-            className="w-full px-3 py-2 border rounded-md mb-2"
+            className="w-full px-3 py-2 border border-input rounded-md mb-2 bg-background text-foreground placeholder:text-muted-foreground"
             placeholder="Full name"
           />
           <input
             type="email"
-            className="w-full px-3 py-2 border rounded-md mb-2"
+            className="w-full px-3 py-2 border border-input rounded-md mb-2 bg-background text-foreground placeholder:text-muted-foreground"
             placeholder="Email"
           />
           <input
             type="tel"
-            className="w-full px-3 py-2 border rounded-md"
+            className="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground placeholder:text-muted-foreground"
             placeholder="Phone number"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-2">
+          <label className="block text-sm font-medium text-foreground mb-2">
             Restaurant Description
           </label>
           <textarea
-            className="w-full px-3 py-2 border rounded-md"
+            className="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground placeholder:text-muted-foreground"
             rows={4}
             placeholder="Tell us about your restaurant, cuisine type, and specialties"
           />
@@ -172,10 +176,12 @@ function RestaurantApplicationForm() {
 function Field({ label, placeholder }: { label: string; placeholder: string }) {
   return (
     <div>
-      <label className="block text-sm font-medium mb-2">{label}</label>
+      <label className="block text-sm font-medium text-foreground mb-2">
+        {label}
+      </label>
       <input
         type="text"
-        className="w-full px-3 py-2 border rounded-md"
+        className="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground placeholder:text-muted-foreground"
         placeholder={placeholder}
       />
     </div>

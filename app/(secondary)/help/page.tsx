@@ -40,24 +40,26 @@ export default function HelpPage() {
         {faqs.map((group) => (
           <div
             key={group.section}
-            className="rounded-2xl border border-gray-100 shadow-sm overflow-hidden"
+            className="rounded-2xl border border-border shadow-sm overflow-hidden bg-card"
           >
-            <p className="px-4 pt-4 pb-2 text-xs font-semibold text-gray-400 uppercase tracking-widest">
+            <p className="px-4 pt-4 pb-2 text-xs font-semibold text-muted-foreground uppercase tracking-widest">
               {group.section}
             </p>
             {group.items.map((item, i) => (
               <button
                 key={item}
-                className={`flex items-center justify-between w-full px-4 py-3.5 text-sm text-gray-800 hover:bg-gray-50 transition-colors text-left ${i < group.items.length - 1 ? "border-b border-gray-50" : ""}`}
+                className={`flex items-center justify-between w-full px-4 py-3.5 text-sm text-foreground hover:bg-muted transition-colors text-left ${
+                  i < group.items.length - 1 ? "border-b border-border" : ""
+                }`}
               >
                 {item}
-                <ChevronRight className="size-4 text-gray-300 shrink-0 ml-2" />
+                <ChevronRight className="size-4 text-muted-foreground shrink-0 ml-2" />
               </button>
             ))}
           </div>
         ))}
 
-        <p className="text-xs text-center text-gray-300 pt-2">
+        <p className="text-xs text-center text-muted-foreground pt-2">
           Still need help? Email us at support@yourapp.com
         </p>
       </div>

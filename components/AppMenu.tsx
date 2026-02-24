@@ -35,12 +35,12 @@ export default function AppMenu({ open, onOpenChange }: AppMenuProps) {
       <SheetContent
         side="right"
         showCloseButton={false}
-        className="w-72 p-0 data-[state=open]:duration-300 data-[state=closed]:duration-200"
+        className="w-72 p-0 bg-background data-[state=open]:duration-300 data-[state=closed]:duration-200"
       >
         <SheetTitle className="sr-only">Menu</SheetTitle>
         <div className="flex flex-col h-full">
           {/* Header */}
-          <div className="flex items-center gap-3 px-3 pt-3 pb-4 border-b">
+          <div className="flex items-center gap-3 px-3 pt-3 pb-4 border-b border-border">
             <Avatar className="size-8">
               <AvatarImage
                 src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=64&h=64&fit=crop"
@@ -49,16 +49,18 @@ export default function AppMenu({ open, onOpenChange }: AppMenuProps) {
               <AvatarFallback>AC</AvatarFallback>
             </Avatar>
             <div className="flex flex-col flex-1 min-w-0">
-              <span className="text-sm font-medium">Alex Carter</span>
+              <span className="text-sm font-medium text-foreground">
+                Alex Carter
+              </span>
               <span className="text-xs text-muted-foreground">
                 alex.carter@gmail.com
               </span>
             </div>
             <button
               onClick={() => onOpenChange(false)}
-              className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors active:scale-95 shrink-0"
+              className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-muted transition-colors active:scale-95 shrink-0"
             >
-              <Menu size={20} className="text-gray-700" strokeWidth={2.8} />
+              <Menu size={20} className="text-foreground" strokeWidth={2.8} />
             </button>
           </div>
 
@@ -79,9 +81,9 @@ export default function AppMenu({ open, onOpenChange }: AppMenuProps) {
               <button
                 key={label}
                 onClick={() => navigate(path)}
-                className="flex items-center gap-3 w-full px-4 py-2 text-sm hover:bg-accent transition-colors"
+                className="flex items-center gap-3 w-full px-4 py-2 text-sm text-foreground hover:bg-accent transition-colors"
               >
-                <Icon className="size-4" />
+                <Icon className="size-4 text-muted-foreground" />
                 {label}
               </button>
             ))}
@@ -105,9 +107,9 @@ export default function AppMenu({ open, onOpenChange }: AppMenuProps) {
               <button
                 key={label}
                 onClick={() => navigate(path)}
-                className="flex items-center gap-3 w-full px-4 py-2 text-sm hover:bg-accent transition-colors"
+                className="flex items-center gap-3 w-full px-4 py-2 text-sm text-foreground hover:bg-accent transition-colors"
               >
-                <Icon className="size-4" />
+                <Icon className="size-4 text-muted-foreground" />
                 {label}
               </button>
             ))}
@@ -117,15 +119,15 @@ export default function AppMenu({ open, onOpenChange }: AppMenuProps) {
             </p>
             <button
               onClick={() => navigate("/partner")}
-              className="flex items-center gap-3 w-full px-4 py-2 text-sm hover:bg-accent transition-colors"
+              className="flex items-center gap-3 w-full px-4 py-2 text-sm text-foreground hover:bg-accent transition-colors"
             >
-              <Briefcase className="size-4" />
+              <Briefcase className="size-4 text-muted-foreground" />
               Join as Partner
             </button>
           </div>
 
           {/* Footer */}
-          <div className="border-t py-2">
+          <div className="border-t border-border py-2">
             {[
               { icon: LifeBuoy, label: "Help & FAQ", path: "/help" },
               { icon: Send, label: "Feedback", path: "/feedback" },
@@ -133,9 +135,9 @@ export default function AppMenu({ open, onOpenChange }: AppMenuProps) {
               <button
                 key={label}
                 onClick={() => navigate(path)}
-                className="flex items-center gap-3 w-full px-4 py-2 text-sm hover:bg-accent transition-colors"
+                className="flex items-center gap-3 w-full px-4 py-2 text-sm text-foreground hover:bg-accent transition-colors"
               >
-                <Icon className="size-4" />
+                <Icon className="size-4 text-muted-foreground" />
                 {label}
               </button>
             ))}

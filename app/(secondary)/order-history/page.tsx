@@ -85,7 +85,7 @@ function OrderHistoryCard({ order }: { order: (typeof pastOrders)[0] }) {
   const isDelivered = order.status === "Delivered";
 
   return (
-    <div className="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div className="rounded-2xl overflow-hidden shadow-sm border border-border bg-card">
       <div className="p-4">
         <div className="flex items-start gap-3">
           <div className="relative size-14 rounded-xl overflow-hidden shrink-0">
@@ -99,24 +99,31 @@ function OrderHistoryCard({ order }: { order: (typeof pastOrders)[0] }) {
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between">
-              <p className="text-sm font-semibold text-gray-900">
+              <p className="text-sm font-semibold text-card-foreground">
                 {order.restaurant}
               </p>
               <span
-                className={`text-xs font-medium px-2 py-0.5 rounded-full ${isDelivered ? "bg-green-50 text-green-600" : "bg-red-50 text-red-500"}`}
+                className={`text-xs font-medium px-2 py-0.5 rounded-full ${
+                  isDelivered
+                    ? "bg-green-500/10 text-green-600"
+                    : "bg-destructive/10 text-destructive"
+                }`}
               >
                 {order.status}
               </span>
             </div>
-            <p className="text-sm text-gray-500 truncate mt-0.5">
+            <p className="text-sm text-muted-foreground truncate mt-0.5">
               {order.item}
               {order.extras && (
-                <span className="text-gray-400"> {order.extras}</span>
+                <span className="text-muted-foreground/60">
+                  {" "}
+                  {order.extras}
+                </span>
               )}
             </p>
             <div className="flex items-center justify-between mt-1">
-              <p className="text-xs text-gray-400">{order.date}</p>
-              <p className="text-sm font-semibold text-gray-800">
+              <p className="text-xs text-muted-foreground">{order.date}</p>
+              <p className="text-sm font-semibold text-card-foreground">
                 {order.total}
               </p>
             </div>
@@ -128,21 +135,27 @@ function OrderHistoryCard({ order }: { order: (typeof pastOrders)[0] }) {
             {Array.from({ length: 5 }).map((_, i) => (
               <Star
                 key={i}
-                className={`size-3.5 ${i < order.rating! ? "text-amber-400 fill-amber-400" : "text-gray-200 fill-gray-200"}`}
+                className={`size-3.5 ${
+                  i < order.rating!
+                    ? "text-amber-400 fill-amber-400"
+                    : "text-muted fill-muted"
+                }`}
               />
             ))}
-            <span className="text-xs text-gray-400 ml-1">Your rating</span>
+            <span className="text-xs text-muted-foreground ml-1">
+              Your rating
+            </span>
           </div>
         )}
       </div>
 
-      <div className="flex border-t border-gray-100">
-        <button className="flex-1 flex items-center justify-center gap-2 py-3 text-xs font-semibold text-gray-500 hover:bg-gray-50 transition-colors border-r border-gray-100">
+      <div className="flex border-t border-border">
+        <button className="flex-1 flex items-center justify-center gap-2 py-3 text-xs font-semibold text-muted-foreground hover:bg-muted transition-colors border-r border-border">
           <Receipt className="size-3.5" />
           Receipt
         </button>
         {isDelivered && (
-          <button className="flex-1 flex items-center justify-center gap-2 py-3 text-xs font-semibold text-green-600 hover:bg-green-50 transition-colors">
+          <button className="flex-1 flex items-center justify-center gap-2 py-3 text-xs font-semibold text-green-600 hover:bg-green-500/10 transition-colors">
             <RotateCcw className="size-3.5" />
             Reorder
           </button>

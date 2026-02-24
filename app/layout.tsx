@@ -26,8 +26,9 @@ export default function RootLayout({
   return (
     <ConvexAuthNextjsServerProvider>
       <html lang="en">
-        <body className={`${inter.variable} antialiased select-none`}>
-          {" "}
+        <body
+          className={`${inter.variable} antialiased select-none bg-background text-foreground`}
+        >
           <ConvexClientProvider>{children}</ConvexClientProvider>
         </body>
       </html>

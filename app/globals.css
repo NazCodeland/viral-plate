@@ -1,9 +1,8 @@
 /* app/globals.css */
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "shadcn/tailwind.css";
 
-@custom-variant dark (&:is(.dark *));
+@variant dark (@media (prefers-color-scheme: dark));
 
 html {
   overflow: hidden;
@@ -130,6 +129,6 @@ body {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply text-foreground;
+    @apply bg-background text-foreground;
   }
 }

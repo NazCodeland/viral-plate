@@ -53,7 +53,7 @@ export default function CurrentOrdersPage() {
 
 function OrderCard({ order }: { order: (typeof currentOrders)[0] }) {
   return (
-    <div className="rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+    <div className="rounded-2xl overflow-hidden shadow-sm border border-border bg-card">
       <div className="p-4">
         <div className="flex items-start gap-3">
           <div className="relative size-16 rounded-xl overflow-hidden shrink-0">
@@ -67,7 +67,9 @@ function OrderCard({ order }: { order: (typeof currentOrders)[0] }) {
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between">
-              <p className="text-xs text-gray-400 font-medium">{order.id}</p>
+              <p className="text-xs text-muted-foreground font-medium">
+                {order.id}
+              </p>
               <span
                 className={`text-xs font-semibold px-2 py-0.5 rounded-full flex items-center gap-1 ${order.statusColor}`}
               >
@@ -75,10 +77,10 @@ function OrderCard({ order }: { order: (typeof currentOrders)[0] }) {
                 {order.status}
               </span>
             </div>
-            <p className="text-sm font-semibold text-gray-900 mt-0.5">
+            <p className="text-sm font-semibold text-card-foreground mt-0.5">
               {order.restaurant}
             </p>
-            <p className="text-sm text-gray-500 truncate">
+            <p className="text-sm text-muted-foreground truncate">
               {order.item} {order.extras}
             </p>
           </div>
@@ -86,10 +88,10 @@ function OrderCard({ order }: { order: (typeof currentOrders)[0] }) {
 
         <div className="mt-4">
           <div className="flex items-center gap-2 mb-2">
-            <Clock className="size-3.5 text-gray-400" />
-            <span className="text-xs text-gray-500">{order.eta}</span>
+            <Clock className="size-3.5 text-muted-foreground" />
+            <span className="text-xs text-muted-foreground">{order.eta}</span>
           </div>
-          <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+          <div className="h-1.5 bg-muted rounded-full overflow-hidden">
             <div
               className="h-full bg-green-500 rounded-full transition-all duration-500"
               style={{ width: `${order.progress}%` }}
@@ -98,12 +100,12 @@ function OrderCard({ order }: { order: (typeof currentOrders)[0] }) {
         </div>
       </div>
 
-      <button className="flex items-center justify-between w-full px-4 py-3 bg-gray-50 border-t border-gray-100 text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors">
+      <button className="flex items-center justify-between w-full px-4 py-3 bg-muted border-t border-border text-sm font-medium text-foreground hover:bg-accent transition-colors">
         <div className="flex items-center gap-2">
           <MapPin className="size-4 text-green-600" />
           Track Order
         </div>
-        <ChevronRight className="size-4 text-gray-400" />
+        <ChevronRight className="size-4 text-muted-foreground" />
       </button>
     </div>
   );
@@ -112,11 +114,13 @@ function OrderCard({ order }: { order: (typeof currentOrders)[0] }) {
 function EmptyState() {
   return (
     <div className="flex flex-col items-center justify-center py-24 text-center">
-      <div className="size-16 rounded-full bg-gray-100 flex items-center justify-center mb-4">
-        <Package className="size-8 text-gray-400" />
+      <div className="size-16 rounded-full bg-muted flex items-center justify-center mb-4">
+        <Package className="size-8 text-muted-foreground" />
       </div>
-      <p className="text-base font-semibold text-gray-800">No active orders</p>
-      <p className="text-sm text-gray-400 mt-1">
+      <p className="text-base font-semibold text-foreground">
+        No active orders
+      </p>
+      <p className="text-sm text-muted-foreground mt-1">
         Your current orders will appear here
       </p>
     </div>

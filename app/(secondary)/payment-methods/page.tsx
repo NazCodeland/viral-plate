@@ -92,7 +92,7 @@ export default function PaymentMethodsPage() {
           />
         ))}
 
-        <button className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl border-2 border-dashed border-gray-200 text-sm font-semibold text-gray-400 hover:border-green-400 hover:text-green-600 hover:bg-green-50 transition-all">
+        <button className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl border-2 border-dashed border-border text-sm font-semibold text-muted-foreground hover:border-green-500 hover:text-green-600 hover:bg-green-500/5 transition-all">
           <Plus className="size-4" />
           Add Payment Method
         </button>
@@ -104,9 +104,9 @@ export default function PaymentMethodsPage() {
             className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 animate-in fade-in duration-200"
             onClick={() => setSelectedCard(null)}
           />
-          <div className="fixed bottom-0 left-0 right-0 z-50 rounded-t-3xl shadow-2xl animate-in slide-in-from-bottom duration-300">
+          <div className="fixed bottom-0 left-0 right-0 z-50 bg-popover rounded-t-3xl shadow-2xl animate-in slide-in-from-bottom duration-300">
             <div className="flex justify-center pt-3 pb-1">
-              <div className="w-10 h-1 bg-gray-200 rounded-full" />
+              <div className="w-10 h-1 bg-muted-foreground/30 rounded-full" />
             </div>
             <div className="px-5 pt-2 pb-4">
               <div
@@ -129,9 +129,9 @@ export default function PaymentMethodsPage() {
               {!selectedCard.isDefault && (
                 <button
                   onClick={() => setDefault(selectedCard.id)}
-                  className="flex items-center gap-3 w-full px-4 py-3.5 rounded-xl text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors"
+                  className="flex items-center gap-3 w-full px-4 py-3.5 rounded-xl text-sm font-medium text-popover-foreground hover:bg-muted transition-colors"
                 >
-                  <div className="size-9 rounded-full bg-green-100 flex items-center justify-center">
+                  <div className="size-9 rounded-full bg-green-500/10 flex items-center justify-center">
                     <Star className="size-4 text-green-600" />
                   </div>
                   Set as default
@@ -139,19 +139,19 @@ export default function PaymentMethodsPage() {
               )}
               <button
                 onClick={() => deleteCard(selectedCard.id)}
-                className="flex items-center gap-3 w-full px-4 py-3.5 rounded-xl text-sm font-medium text-red-500 hover:bg-red-50 transition-colors"
+                className="flex items-center gap-3 w-full px-4 py-3.5 rounded-xl text-sm font-medium text-destructive hover:bg-destructive/10 transition-colors"
               >
-                <div className="size-9 rounded-full bg-red-100 flex items-center justify-center">
-                  <Trash2 className="size-4 text-red-500" />
+                <div className="size-9 rounded-full bg-destructive/10 flex items-center justify-center">
+                  <Trash2 className="size-4 text-destructive" />
                 </div>
                 Remove card
               </button>
               <button
                 onClick={() => setSelectedCard(null)}
-                className="flex items-center gap-3 w-full px-4 py-3.5 rounded-xl text-sm font-medium text-gray-400 hover:bg-gray-50 transition-colors"
+                className="flex items-center gap-3 w-full px-4 py-3.5 rounded-xl text-sm font-medium text-muted-foreground hover:bg-muted transition-colors"
               >
-                <div className="size-9 rounded-full bg-gray-100 flex items-center justify-center">
-                  <X className="size-4 text-gray-400" />
+                <div className="size-9 rounded-full bg-muted flex items-center justify-center">
+                  <X className="size-4 text-muted-foreground" />
                 </div>
                 Cancel
               </button>
