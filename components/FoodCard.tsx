@@ -1,13 +1,5 @@
 "use client";
 // components/FoodCard.tsx
-//
-// Hold-to-hide uses event delegation via useHoldToHide() from useOverlay.
-// A single set of pointer handlers on the root div catches all events.
-// Interactive elements (buttons, links) are filtered out inside the hook
-// via e.target.closest() — no z-index tricks, no prop drilling, no capture div.
-//
-// Swipe detection (onPointerMove) ensures scrolling to the next card never
-// accidentally triggers hide — a production bug in naive 250ms-only approaches.
 
 import { useEffect, useRef } from "react";
 import type { Dish } from "@/app/types";
@@ -37,12 +29,10 @@ function FoodCardInner({
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Sync effectivelyVisible up to the page so MenuButton can react.
   useEffect(() => {
     onOverlayChange?.(effectivelyVisible);
   }, [effectivelyVisible, onOverlayChange]);
 
-  // Play / pause / reset on scroll intersection.
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -71,7 +61,6 @@ function FoodCardInner({
     return () => observer.disconnect();
   }, [triggerReveal, hide]);
 
-  // Tap on non-interactive surface → toggle play/pause.
   function togglePlayPause() {
     const video = videoRef.current;
     if (!video) return;
@@ -82,9 +71,6 @@ function FoodCardInner({
     }
   }
 
-  // Event delegation — one handler on the root, interactive elements
-  // are filtered out inside the hook. Swipe detection prevents accidental
-  // hide during scroll.
   const holdProps = useHoldToHide({ onTap: togglePlayPause });
 
   const overlayStyle: React.CSSProperties = {
@@ -129,8 +115,6 @@ function FoodCardInner({
       </div>
 
       {/* ── UI layers ─────────────────────────────────────────────────── */}
-
-      {/* CreatorAndSocialRail — avatar + action buttons on the right, filtered out by hook automatically */}
       <div className="transition-opacity duration-300" style={overlayStyle}>
         <CreatorAndSocialRail
           handle={dish.creator.handle}
@@ -142,7 +126,6 @@ function FoodCardInner({
         />
       </div>
 
-      {/* OrderPanel — isLocationShared + onLocationGranted forwarded from parent */}
       <div className="relative z-20">
         <OrderPanel
           title={dish.title}
@@ -153,6 +136,7 @@ function FoodCardInner({
           isLocationShared={isLocationShared}
           onLocationGranted={onLocationGranted}
           onCustomize={onCustomize}
+          description={dish.dishDescription}
         />
       </div>
     </div>

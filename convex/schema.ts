@@ -1,4 +1,4 @@
-// convex\schema.ts
+// convex/schema.ts
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 import { authTables } from "@convex-dev/auth/server";
@@ -13,17 +13,18 @@ export default defineSchema({
     userId: v.id("users"),
 
     description: v.string(),
+    dishDescription: v.string(), // Human-readable dish blurb shown in OrderPanel
     ingredients: v.array(v.string()),
     cuisine: v.string(),
 
-    // Commerce Data (Updated to match Svelte types)
+    // Commerce Data
     price: v.number(),
     restaurantName: v.string(),
     arrivalTime: v.string(),
     arrivalMinutes: v.number(),
     distanceKm: v.number(),
 
-    // Metrics (Added denormalized counters for fast feed loading)
+    // Metrics
     views: v.number(),
     likesCount: v.number(),
     savesCount: v.number(),
@@ -36,7 +37,7 @@ export default defineSchema({
 
   partners: defineTable({
     userId: v.id("users"),
-    handle: v.string(), // Added to satisfy CreatorHeader.svelte
+    handle: v.string(),
     bio: v.string(),
     cuisine: v.string(),
     isVerified: v.boolean(),
@@ -59,7 +60,6 @@ export default defineSchema({
     orderTime: v.number(),
   }).index("by_user_status", ["userId", "status"]),
 
-  // Social Tables (Added Saves and Comments)
   likes: defineTable({
     userId: v.id("users"),
     videoId: v.id("videos"),

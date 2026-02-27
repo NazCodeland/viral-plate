@@ -39,6 +39,8 @@ export const seed = mutation({
       title: "Green Goddess Salad",
       description:
         "The viral salad that everyone is talking about! Crunchy, healthy, and delicious.",
+      dishDescription:
+        "Crisp napa cabbage, cucumber ribbons, fresh chives, baby spinach, and fragrant basil tossed in our signature green goddess dressing.",
       videoKey:
         "https://videos.pexels.com/video-files/4252348/4252348-hd_720_1280_30fps.mp4",
       ingredients: ["Cabbage", "Cucumber", "Chives", "Spinach", "Basil"],
@@ -59,6 +61,8 @@ export const seed = mutation({
       userId: marcoId,
       title: "Spicy Vodka Rigatoni",
       description: "Creamy, spicy, perfect pasta. A classic date night dish.",
+      dishDescription:
+        "Al dente rigatoni in a slow-simmered vodka tomato cream sauce, hit with chili flakes and finished with aged parmesan.",
       videoKey:
         "https://videos.pexels.com/video-files/3209663/3209663-uhd_2560_1440_25fps.mp4",
       ingredients: ["Rigatoni", "Vodka Sauce", "Chili Flakes", "Parmesan"],
@@ -80,6 +84,8 @@ export const seed = mutation({
       title: "Double Wagyu Smash",
       description:
         "The best burger you'll ever taste. Double patty, extra cheese.",
+      dishDescription:
+        "Two smashed A5 wagyu patties, double American cheese pull, caramelized onions, house pickles, and our secret burger sauce on a toasted brioche bun.",
       videoKey:
         "https://videos.pexels.com/video-files/856973/856973-hd_1920_1080_25fps.mp4",
       ingredients: [
@@ -106,6 +112,8 @@ export const seed = mutation({
       title: "Creamy Pesto Fusilli",
       description:
         "Fresh basil pesto with homemade fusilli. Simple and elegant.",
+      dishDescription:
+        "Hand-rolled fusilli tossed in stone-ground basil pesto, toasted pine nuts, a drizzle of Sicilian olive oil, and shaved pecorino.",
       videoKey:
         "https://videos.pexels.com/video-files/3209663/3209663-uhd_2560_1440_25fps.mp4",
       ingredients: ["Fusilli", "Basil Pesto", "Pine Nuts", "Olive Oil"],
@@ -126,6 +134,8 @@ export const seed = mutation({
       userId: melissaId,
       title: "Kale & Quinoa Bowl",
       description: "Superfood power bowl with lemon vinaigrette.",
+      dishDescription:
+        "Massaged kale, fluffy quinoa, roasted chickpeas, sliced avocado, and a bright lemon tahini vinaigrette.",
       videoKey:
         "https://videos.pexels.com/video-files/4252348/4252348-hd_720_1280_30fps.mp4",
       ingredients: ["Kale", "Quinoa", "Chickpeas", "Lemon"],
@@ -146,6 +156,8 @@ export const seed = mutation({
       userId: grillId,
       title: "The Midnight Slider",
       description: "Perfect for late night cravings. Open until 3am.",
+      dishDescription:
+        "The viral sensation. Seasoned smash beef, crispy tortilla shell, melted cheddar, and our secret homemade mac sauce.",
       videoKey:
         "https://videos.pexels.com/video-files/856973/856973-hd_1920_1080_25fps.mp4",
       ingredients: ["Beef Patty", "Cheddar", "Onions", "Pickles"],

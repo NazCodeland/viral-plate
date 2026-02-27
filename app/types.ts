@@ -1,4 +1,4 @@
-// app\types.ts
+// app/types.ts
 export interface Creator {
   handle: string;
   avatarUrl: string;
@@ -18,6 +18,7 @@ export interface SocialStats {
 export interface Dish {
   id: string;
   title: string;
+  dishDescription: string;
   price: number;
   views: number;
   rating: number;

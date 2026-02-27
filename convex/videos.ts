@@ -12,10 +12,8 @@ export const getFeed = query({
 
     const results = await Promise.all(
       videos.map(async (video) => {
-        // Join with users for avatar
         const user = await ctx.db.get(video.userId);
 
-        // Join with partners for handle (the creator's public profile)
         const partner = await ctx.db
           .query("partners")
           .withIndex("by_user", (q) => q.eq("userId", video.userId))
@@ -25,7 +23,7 @@ export const getFeed = query({
           _id: video._id,
           title: video.title,
           videoKey: video.videoKey,
-          posterUrl: null, // posterStorageId needs a storage URL — handle when adding uploads
+          posterUrl: null,
           price: video.price,
           views: video.views,
           rating: video.rating,
@@ -36,6 +34,8 @@ export const getFeed = query({
           likesCount: video.likesCount,
           savesCount: video.savesCount,
           commentsCount: video.commentsCount,
+          description: video.description,
+          dishDescription: video.dishDescription,
           creator: {
             handle: partner?.handle ?? user?.name ?? "Unknown",
             avatarUrl: user?.image ?? "",

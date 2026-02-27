@@ -106,23 +106,25 @@ export default function SocialRail({ likes, saves }: Props) {
         </span>
       </button>
 
-      {/* Share */}
+      {/* Share — viewBox scaled from 20x20 to 24x24 to match heart and bookmark */}
       <button
         onClick={() => {}}
         aria-label="Share"
-        className="flex flex-col items-center gap-1 bg-transparent border-none cursor-pointer transition-transform active:scale-[0.85]"
+        className="flex flex-col items-center gap-1 bg-transparent border-none cursor-pointer transition-transform active:scale-[0.85] text-white"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
+          viewBox="0 0 24 24"
           fill="none"
           stroke="white"
-          strokeWidth="1.5"
+          strokeWidth="2"
           strokeLinejoin="round"
+          strokeLinecap="round"
           width="22"
           height="22"
         >
-          <path d="M10.938 3.175a.674.674 0 0 1 1.138-.488l6.526 6.215c.574.547.554 1.47-.043 1.991l-6.505 5.676a.674.674 0 0 1-1.116-.508V13.49s-6.985-1.258-9.225 2.854c-.209.384-1.023.518-.857-1.395.692-3.52 2.106-9.017 10.082-9.017z" />
+          {/* Original 20x20 path scaled by 24/20 = 1.2 */}
+          <path d="M13.126 3.81a.808.808 0 0 1 1.366-.586l7.831 7.458c.689.656.665 1.764-.052 2.39l-7.806 6.811a.809.809 0 0 1-1.338-.61V16.19s-8.382-1.51-11.07 3.424c-.251.46-1.228.621-1.028-1.674.83-4.224 2.527-10.82 12.097-10.82z" />
         </svg>
         <span className="text-[11px] font-semibold text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.5)]">
           Share

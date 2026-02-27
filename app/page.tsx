@@ -15,11 +15,7 @@ export default function FeedPage() {
   const feed = useQuery(api.videos.getFeed, {});
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMenuVisible, setIsMenuVisible] = useState(false);
-
-  // Shared across all cards — once the user grants location once, every card knows.
   const [isLocationShared, setIsLocationShared] = useState(false);
-
-  // Onboarding modal — shown on every visit for now, localStorage tracking added later.
   const [showOnboarding, setShowOnboarding] = useState(true);
 
   function openComments() {
@@ -45,13 +41,6 @@ export default function FeedPage() {
       <MenuButton visible={isMenuVisible} onClick={() => setMenuOpen(true)} />
       <AppMenu open={menuOpen} onOpenChange={setMenuOpen} />
 
-      {/*
-        data-scroll-root: semantic marker so FoodCard's IntersectionObserver
-        can target this exact element as its root via closest("[data-scroll-root]").
-        This makes the observer measure intersection ratios relative to this
-        container's height rather than the visual viewport — fixing split-screen
-        mode where the viewport can be smaller than the card.
-      */}
       <div
         data-scroll-root
         className="h-dvh w-full snap-y snap-mandatory overflow-y-scroll bg-black [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
@@ -62,6 +51,7 @@ export default function FeedPage() {
               dish={{
                 id: video._id,
                 title: video.title,
+                dishDescription: video.dishDescription,
                 videoSrc: video.videoKey,
                 posterUrl: video.posterUrl ?? "",
                 price: video.price,

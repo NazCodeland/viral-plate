@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useOverlay } from "@/state/useOverlay";
 import LocationModal from "./LocationModal";
 import CustomizeDish from "./CustomizeDish";
+import Badge from "./Badge";
 import { requestGeolocation } from "@/utils/geolocation";
 import { Clock } from "lucide-react";
 
@@ -95,7 +96,7 @@ export default function OrderPanel({
         onDismiss={() => setShowLocationModal(false)}
       />
 
-      <div className="relative z-20 p-4 flex flex-col gap-3 w-full bg-linear-to-t from-black/80 via-black/40 to-transparent pt-12 font-jakarta">
+      <div className="relative z-20 p-4 flex flex-col gap-3 w-full bg-linear-to-t from-black/80 via-black/40 to-transparent font-jakarta">
         <div
           className="flex flex-col gap-3 transition-opacity duration-300"
           style={{
@@ -105,17 +106,12 @@ export default function OrderPanel({
         >
           {/* Row 0: Trending Tag — blue flame */}
           {isTrending && (
-            <div
-              className="text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-md w-max"
-              style={{
-                background: "rgba(30, 80, 255, 0.12)",
-                border: "1px solid rgba(80, 160, 255, 0.28)",
-                color: "rgba(120, 195, 255, 0.95)",
-                textShadow: "0 0 10px rgba(80, 160, 255, 0.55)",
-              }}
-            >
-              #1 Trending Today
-            </div>
+            <Badge
+              variant="blue"
+              prefix="#1"
+              label="Trending Today"
+              textColor="rgba(10, 30, 120, 1)"
+            />
           )}
 
           {/* Row 1: Dish title */}
@@ -137,40 +133,37 @@ export default function OrderPanel({
             </button>
           )}
 
-          {/* Row 3: Pills */}
-          <div className="flex items-center gap-2.25 flex-wrap">
-            {/* Orders pill — plain white/glass, same as rating + delivery */}
-            <span className="flex items-center gap-1.5 bg-white/10 backdrop-blur border border-white/10 rounded-full px-2.25 py-1 text-white text-xs font-bold">
-              {formatViews(views)} Orders
-            </span>
+          {/* Row 3: Pills — px-2.25 and gap-2.25 preserved exactly from original */}
+          <div className="flex items-center gap-2 flex-wrap">
+            <Badge
+              variant="glass"
+              px="px-2.25"
+              label={`${formatViews(views)} Orders`}
+            />
+            <Badge
+              variant="glass"
+              px="px-2.25"
+              icon="⭐"
+              label={rating.toFixed(1)}
+            />
 
-            {/* Rating pill */}
-            <span className="flex items-center gap-1.5 bg-white/10 backdrop-blur border border-white/10 rounded-full px-2.25 py-1 text-white text-xs font-bold">
-              ⭐ {rating.toFixed(1)}
-            </span>
-
-            {/* Delivery time pill */}
             {isLocationShared ? (
-              <span className="flex items-center gap-1.5 bg-white/10 backdrop-blur border border-white/10 rounded-full px-2.25 py-1 text-white text-xs font-bold">
-                <Clock className="w-3 h-3" />
-                {arrivalMinutes} min
-              </span>
+              <Badge
+                variant="glass"
+                px="px-2.25"
+                icon={<Clock className="w-3 h-3" />}
+                label={`${arrivalMinutes} min`}
+              />
             ) : (
-              <button
+              <Badge
+                variant="outline"
+                px="px-2.25"
+                icon={<Clock className="w-3 h-3" />}
+                label="Delivery"
                 onClick={() => setShowLocationModal(true)}
-                className="flex items-center gap-1.5 rounded-full px-2.25 py-1 text-xs font-bold cursor-pointer transition-colors active:bg-white/10"
-                style={{
-                  background: "rgba(255,255,255,0.05)",
-                  border: "1px dashed rgba(255,255,255,0.3)",
-                  color: "rgba(255,255,255,0.5)",
-                }}
-              >
-                <Clock className="w-3 h-3" />
-                Delivery
-              </button>
+              />
             )}
 
-            {/* Edit pill */}
             <CustomizeDish onClick={onCustomize} />
           </div>
 

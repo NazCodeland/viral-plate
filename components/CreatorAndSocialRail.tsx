@@ -22,7 +22,7 @@ export default function CreatorAndSocialRail({
   onCreator,
 }: Props) {
   return (
-    <div className="absolute right-3 bottom-44 z-20 flex flex-col items-center gap-5">
+    <div className="absolute right-4 bottom-54 z-30 flex flex-col items-center gap-5">
       <CreatorHeader
         handle={handle}
         avatarUrl={avatarUrl}
