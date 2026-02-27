@@ -11,7 +11,7 @@ interface Props {
 export default function Logo({ visible = true }: Props) {
   return (
     <div
-      className="fixed top-[max(12px,env(safe-area-inset-top))] left-3 z-50"
+      className="fixed top-[max(16px,env(safe-area-inset-top))] left-3 z-50"
       style={{
         opacity: visible ? 1 : 0,
         transition: visible ? "opacity 300ms 120ms" : "none",
