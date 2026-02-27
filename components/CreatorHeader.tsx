@@ -12,7 +12,7 @@ export default function CreatorHeader({ handle, avatarUrl, onClick }: Props) {
     <button
       onClick={onClick}
       aria-label={`View ${handle} profile`}
-      className="relative w-12 h-12 rounded-full bg-cover bg-center shrink-0 cursor-pointer transition-transform active:scale-95"
+      className="relative w-10 h-10 rounded-full bg-cover bg-center shrink-0 cursor-pointer transition-transform active:scale-95"
       style={{ backgroundImage: `url('${avatarUrl}')` }}
     >
       {/* Red "+" follow badge */}
