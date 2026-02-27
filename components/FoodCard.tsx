@@ -12,9 +12,8 @@
 import { useEffect, useRef } from "react";
 import type { Dish } from "@/app/types";
 import { OverlayProvider, useOverlay, useHoldToHide } from "@/state/useOverlay";
-import CreatorHeader from "./CreatorHeader";
+import CreatorAndSocialRail from "./CreatorAndSocialRail";
 import OrderPanel from "./OrderPanel";
-import SocialRail from "./SocialRail";
 
 interface Props {
   dish: Dish;
@@ -131,29 +130,26 @@ function FoodCardInner({
 
       {/* ── UI layers ─────────────────────────────────────────────────── */}
 
-      {/* CreatorHeader — interactive, filtered out by hook automatically */}
-      <CreatorHeader
-        handle={dish.creator.handle}
-        avatarUrl={dish.creator.avatarUrl}
-        onClick={onCreator}
-      />
-
-      {/* SocialRail — interactive buttons, filtered out by hook automatically */}
+      {/* CreatorAndSocialRail — avatar + action buttons on the right, filtered out by hook automatically */}
       <div className="transition-opacity duration-300" style={overlayStyle}>
-        <SocialRail
+        <CreatorAndSocialRail
+          handle={dish.creator.handle}
+          avatarUrl={dish.creator.avatarUrl}
           likes={dish.stats.likes}
           saves={dish.stats.saves}
           comments={dish.stats.comments}
+          onCreator={onCreator}
         />
       </div>
 
-      {/* OrderPanel — buttons filtered out automatically, text/price trigger hide */}
+      {/* OrderPanel — isLocationShared + onLocationGranted forwarded from parent */}
       <div className="relative z-20">
         <OrderPanel
           title={dish.title}
-          restaurantName={dish.restaurant.name}
-          arrivalMinutes={dish.restaurant.arrivalMinutes}
           price={dish.price}
+          views={dish.views}
+          rating={dish.rating}
+          arrivalMinutes={dish.restaurant.arrivalMinutes}
           isLocationShared={isLocationShared}
           onLocationGranted={onLocationGranted}
           onCustomize={onCustomize}

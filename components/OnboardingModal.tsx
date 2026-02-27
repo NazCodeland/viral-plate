@@ -94,7 +94,7 @@ export default function OnboardingModal({ onDismiss }: Props) {
       </div>
 
       {/* Middle — slogan + dish strip */}
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-8">
         <div className="px-6 flex flex-col gap-1">
           {LINES.map((line, i) => (
             <h1
@@ -120,7 +120,6 @@ export default function OnboardingModal({ onDismiss }: Props) {
         <div
           style={{
             overflow: "hidden",
-            marginTop: "28px",
             opacity: visible ? 1 : 0,
             transition: "opacity 700ms ease",
             transitionDelay: leaving ? "0ms" : "560ms",

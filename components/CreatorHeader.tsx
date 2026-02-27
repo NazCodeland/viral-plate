@@ -12,18 +12,20 @@ export default function CreatorHeader({ handle, avatarUrl, onClick }: Props) {
     <button
       onClick={onClick}
       aria-label={`View ${handle} profile`}
-      className="absolute top-[max(16px,env(safe-area-inset-top))] left-4 z-20 flex items-center gap-2.5 bg-transparent border-none cursor-pointer transition-transform active:scale-95"
+      className="relative w-12 h-12 rounded-full bg-cover bg-center shrink-0 cursor-pointer transition-transform active:scale-95"
+      style={{ backgroundImage: `url('${avatarUrl}')` }}
     >
-      <div
-        className="w-9 h-9 rounded-full border-2 border-white/80 bg-cover bg-center shrink-0"
-        style={{ backgroundImage: `url('${avatarUrl}')` }}
-      />
-      <div className="flex flex-col text-left [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">
-        <span className="text-white/80 text-[11px] font-medium uppercase tracking-[0.5px]">
-          Recipe By
-        </span>
-        <span className="text-white font-bold text-[15px]">{handle}</span>
-      </div>
+      {/* Red "+" follow badge */}
+      <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-[#FF2D55] flex items-center justify-center">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+          <path
+            d="M5 2v6M2 5h6"
+            stroke="#fff"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+        </svg>
+      </span>
     </button>
   );
 }

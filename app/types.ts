@@ -19,6 +19,8 @@ export interface Dish {
   id: string;
   title: string;
   price: number;
+  views: number;
+  rating: number;
   videoSrc?: string;
   posterUrl?: string;
   creator: Creator;

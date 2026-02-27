@@ -64,6 +64,8 @@ export default function FeedPage() {
                 videoSrc: video.videoKey,
                 posterUrl: video.posterUrl ?? "",
                 price: video.price,
+                views: video.views,
+                rating: video.rating,
                 creator: {
                   handle: video.creator.handle,
                   avatarUrl: video.creator.avatarUrl,

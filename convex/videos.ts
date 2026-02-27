@@ -27,6 +27,8 @@ export const getFeed = query({
           videoKey: video.videoKey,
           posterUrl: null, // posterStorageId needs a storage URL — handle when adding uploads
           price: video.price,
+          views: video.views,
+          rating: video.rating,
           restaurantName: video.restaurantName,
           arrivalTime: video.arrivalTime,
           arrivalMinutes: video.arrivalMinutes,

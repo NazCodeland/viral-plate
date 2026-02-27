@@ -28,6 +28,7 @@ export default defineSchema({
     likesCount: v.number(),
     savesCount: v.number(),
     commentsCount: v.number(),
+    rating: v.number(),
   })
     .index("by_user", ["userId"])
     .index("by_views", ["views"])
