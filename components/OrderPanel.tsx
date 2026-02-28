@@ -76,7 +76,6 @@ export default function OrderPanel({
     return String(n);
   }
 
-  // UPDATED: Changed to font-extrabold and tracking-normal for a cleaner, punchier button
   const buttonClass = [
     "w-full h-14 rounded-2xl flex items-center justify-between px-5",
     "text-lg font-extrabold tracking-normal transition-all duration-200",
@@ -105,36 +104,32 @@ export default function OrderPanel({
             pointerEvents: effectivelyVisible ? "auto" : "none",
           }}
         >
-          {/* Row 0: Trending Tag — blue flame */}
+          {/* Row 0: Trending Tag */}
           {isTrending && (
-            <Badge
-              variant="blue"
-              prefix="#1"
-              label="Trending Today"
-              textColor="rgba(10, 30, 120, 1)"
+            <Badge variant="blue" prefix="#1" label="Trending Today" />
+          )}
+
+          {/* Row 1+2: Title + Description grouped */}
+          <div className="flex flex-col gap-1">
+            <h1
+              className="text-white text-3xl font-extrabold leading-tight [text-shadow:0_4px_16px_rgba(0,0,0,0.6)]"
+              dangerouslySetInnerHTML={{ __html: title }}
             />
-          )}
 
-          {/* Row 1: Dish title */}
-          <h1
-            className="text-white text-3xl font-extrabold leading-tight[text-shadow:0_4px_16px_rgba(0,0,0,0.6)]"
-            dangerouslySetInnerHTML={{ __html: title }}
-          />
+            {description && (
+              <button
+                onClick={onCustomize}
+                className="text-left w-full cursor-pointer active:opacity-70 transition-opacity"
+                aria-label="Read full description"
+              >
+                <p className="text-[13px] md:text-sm text-gray-300 font-medium line-clamp-1 leading-snug [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]">
+                  {description}
+                </p>
+              </button>
+            )}
+          </div>
 
-          {/* Row 2: Dish Description */}
-          {description && (
-            <button
-              onClick={onCustomize}
-              className="text-left w-full cursor-pointer active:opacity-70 transition-opacity"
-              aria-label="Read full description"
-            >
-              <p className="text-[13px] md:text-sm text-gray-300 font-medium line-clamp-1 leading-snug[text-shadow:0_1px_3px_rgba(0,0,0,0.8)]">
-                {description}
-              </p>
-            </button>
-          )}
-
-          {/* Row 3: Pills (Make sure your Badge component uses font-bold, not extrabold/black!) */}
+          {/* Row 3: Pills */}
           <div className="flex items-center gap-1.5 flex-wrap">
             <Badge
               variant="glass"
@@ -168,7 +163,7 @@ export default function OrderPanel({
             <CustomizeDish onClick={onCustomize} />
           </div>
 
-          {/* Row 4: CTA — flame gradient exclusively owned here */}
+          {/* Row 4: CTA */}
           <button
             onClick={handleMainAction}
             disabled={orderState !== "idle"}
