@@ -37,7 +37,7 @@ export default function FeedPage() {
       {showOnboarding && (
         <OnboardingModal onDismiss={() => setShowOnboarding(false)} />
       )}
-      <Logo visible={isMenuVisible} />
+      <Logo />
       <MenuButton visible={isMenuVisible} onClick={() => setMenuOpen(true)} />
       <AppMenu open={menuOpen} onOpenChange={setMenuOpen} />
 
