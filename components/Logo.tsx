@@ -21,12 +21,16 @@ export default function Logo({ hidden = false }: LogoProps) {
       {/* Invisible SVG — defines the flame gradient used by the icon */}
       <svg width="0" height="0" className="absolute">
         <defs>
-          {/* Fire burns bottom-to-top: blue base → yellow → orange → red tip */}
+          {/* Fire: yellow base → orange body → red tip using oklch for perceptually smooth blend */}
           <linearGradient id="fire-gradient" x1="0%" y1="100%" x2="0%" y2="0%">
-            <stop offset="0%" stopColor="#3b82f6" /> {/* Blue   */}
-            <stop offset="33%" stopColor="#eab308" /> {/* Yellow */}
-            <stop offset="66%" stopColor="#f97316" /> {/* Orange */}
-            <stop offset="100%" stopColor="#ef4444" /> {/* Red    */}
+            {/* Yellow base - tightly constrained to the bottom for the "hottest" core */}
+            <stop offset="0%" stopColor="oklch(0.85 0.18 90)" />
+
+            {/* Orange body - hits peak orange at 40% to fill the wide base curves naturally */}
+            <stop offset="40%" stopColor="oklch(0.70 0.19 50)" />
+
+            {/* Red tip - smoothly gradients into red for the remaining top 60% */}
+            <stop offset="100%" stopColor="oklch(0.55 0.22 27)" />
           </linearGradient>
         </defs>
       </svg>
